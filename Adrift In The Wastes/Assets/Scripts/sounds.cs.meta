@@ -3,7 +3,21 @@ guid: 3a07a6bd5cea5654fb2a7f6ab8e14b7e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - musicPresent: {fileID: 8300000, guid: 6eea839bd0deba941ad2335d546e53f7, type: 3}
+  - musicPast: {fileID: 8300000, guid: 756e04cbcfd030c48b94c30ac831c849, type: 3}
+  - chamberPresent: {fileID: 8300000, guid: 1032c39f2adc5814898d77afe1c67867, type: 3}
+  - chamberPast: {fileID: 8300000, guid: e5921272a96111245b4786713dceb2e2, type: 3}
+  - walkPresent: {instanceID: 0}
+  - walkPast: {instanceID: 0}
+  - landing: {instanceID: 0}
+  - wind: {fileID: 8300000, guid: 40a808c61ce19d34bb6db77565bfc552, type: 3}
+  - pastAmbience: {instanceID: 0}
+  - itemCollect: {instanceID: 0}
+  - puzzleComplete: {instanceID: 0}
+  - repairedLand: {fileID: 8300000, guid: 117c63e805f0b1d4884af4c4c6f05126, type: 3}
+  - player: {instanceID: 0}
+  - rb: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
