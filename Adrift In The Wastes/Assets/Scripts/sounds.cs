@@ -16,6 +16,10 @@ public class sounds : MonoBehaviour
     public AudioClip itemCollect;
     public AudioClip puzzleComplete;
     public AudioClip repairedLand;
+    public AudioSource PresentS;
+    public AudioSource PastS;
+    public AudioSource SFXS;
+    public AudioSource Ambiance;
     public GameObject player;
     public Rigidbody rb;
     public float tState;
@@ -24,6 +28,10 @@ public class sounds : MonoBehaviour
     {
         tState = player.gameObject.GetComponent<PlayerController>().CurrentTimePhase;
         StartCoroutine(music());
+        PresentS.Play();
+        PastS.Play();
+        Ambiance.Play();
+
     }
 
     // Update is called once per frame
@@ -36,16 +44,25 @@ public class sounds : MonoBehaviour
     {
         while (true)
         {
+            yield return new WaitForSeconds(0);
             switch (tState)
             {
                 case 0:
-                    //musicPresent
+                    PresentS.UnPause();
+                    Ambiance.UnPause();
+                    PastS.Pause();
                     break;
                 case 1:
-                    //music2
+                    PastS.UnPause();
+                    PresentS.Pause();
+                    Ambiance.Pause();
                     break;
                 case 2:
-                    //music3
+                    PresentS.Pause();
+                    Ambiance.Pause();
+                    PastS.Pause();
+                    PresentS.clip = repairedLand;
+                    PresentS.Play();
                     break;
 
             }
