@@ -10,8 +10,11 @@ public class PlayerController : MonoBehaviour
     public static Vector3 PlayerPos;
     private Rigidbody rb;
     private int count;
+    public bool Key1;
     public GameObject PresGroup;
     public GameObject PastGroup;
+    public GameObject FixedGroup;
+    public GameObject KeyOne;
     public float PlayerVelocity;
     public Camera PlayCam;
     private Vector3 offset;
@@ -35,8 +38,8 @@ public class PlayerController : MonoBehaviour
     {
         
         canjump = true;
-        
-      
+
+        Key1 = false;
         Player.transform.position = new Vector3(0, 2, 0);
         StartPos = new Vector3(0, 0, 0);
         MoveV = 0;
@@ -83,28 +86,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && CanTimeShift)
         {
-            Player.transform.parent = null;
-            rb.AddForce(jump * 1.0f, ForceMode.Impulse);
-            //print("flying up");
-            Jumping = false;
-            Falling = true;
-            CanTimeShift = false;
-            switch (CurrentTimePhase)
-            {
-                case 0:
-                    CurrentTimePhase = 1;
-                    PresGroup.gameObject.SetActive(false);
-                    PastGroup.gameObject.SetActive(true);
-                    break;
-                case 1:
-                    CurrentTimePhase = 0;
-                    PresGroup.gameObject.SetActive(true);
-                    PastGroup.gameObject.SetActive(false);
-                    break;
-
-            }
-            StartCoroutine(TimeShiftCoolDown(2));
-
+            StartCoroutine(TimeShift());
         }
 
 
@@ -145,16 +127,31 @@ public class PlayerController : MonoBehaviour
         PlayCam.transform.position = transform.position + offset + new Vector3(MoveH*1, 0, CamDist / 20);
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider boi)
     {
 
 
 
-        if (true)
+        if (boi.gameObject.CompareTag("ActivateChamber") && CurrentTimePhase != 2)
         {
+
+            CurrentTimePhase = 2;
+            StartCoroutine(TimeShift());
+        }
+        else if (boi.gameObject.CompareTag("Zoomy"))
+        {
+            StartCoroutine(ShiftCamera(boi.gameObject.GetComponent<ZoomValue>().Value));
+            
             
         }
-        
+        else if (boi.gameObject.CompareTag("Key1") && boi.gameObject.GetComponent<rotateboi>().State != 1)
+        {
+            KeyOne = boi.gameObject;
+            boi.gameObject.GetComponent<rotateboi>().State = 1;
+            Key1 = true;
+
+        }
+
 
 
     }
@@ -162,6 +159,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision boi)
     {
+        
         //print("i hit something");
         if (boi.gameObject.CompareTag("Ground"))
         {
@@ -190,6 +188,13 @@ public class PlayerController : MonoBehaviour
 
 
         }
+        else if (boi.gameObject.CompareTag("Hole1") && Key1)
+        {
+            KeyOne.gameObject.GetComponent<rotateboi>().State = 2;
+            StartCoroutine(killkey());
+
+
+        }
     }
     private void OnCollisionExit(Collision boi)
     {
@@ -213,7 +218,53 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    IEnumerator ShiftCamera(float endo)
+    {
+        print("StartING cAM mOVE!");
+        for (float i = 0; i < 1; i += .01f)
+        {
+            yield return new WaitForSecondsRealtime(.01f);
+            float CurrentDist = CamDist;
+            print(CurrentDist);
+            CamDist = -EaseOutQuad(CurrentDist, endo, i);
+        }
+    }
+    IEnumerator killkey()
+    {
+        yield return new WaitForEndOfFrame();
+        Key1 = false;
+        KeyOne = null;
+    }
+    IEnumerator TimeShift()
+    {
+        Player.transform.parent = null;
+        rb.AddForce(jump * 1.0f, ForceMode.Impulse);
+        //print("flying up");
+        Jumping = false;
+        Falling = true;
+        CanTimeShift = false;
+        switch (CurrentTimePhase)
+        {
+            case 0:
+                CurrentTimePhase = 1;
+                PresGroup.gameObject.SetActive(false);
+                PastGroup.gameObject.SetActive(true);
+                break;
+            case 1:
+                CurrentTimePhase = 0;
+                PresGroup.gameObject.SetActive(true);
+                PastGroup.gameObject.SetActive(false);
+                break;
+            case 2:
+                PresGroup.gameObject.SetActive(false);
+                PastGroup.gameObject.SetActive(false);
+                FixedGroup.gameObject.SetActive(true);
+                break;
+        }
+        StartCoroutine(TimeShiftCoolDown(2));
+        yield return new WaitForSeconds(0);
 
+    }
 
     IEnumerator TimeShiftCoolDown(float cooldown)
     {
