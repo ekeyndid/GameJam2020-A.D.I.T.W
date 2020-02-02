@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject KeyOne;
     public float PlayerVelocity;
     public Camera PlayCam;
+    public Light Flash;
     private Vector3 offset;
     public float MaxSpeed;
     public float Accel;
@@ -86,6 +87,8 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && CanTimeShift)
         {
+            Player.gameObject.GetComponent<sounds>().TimewarpS();
+            StartCoroutine(TimeShiftEffect());
             StartCoroutine(TimeShift());
         }
 
@@ -274,7 +277,22 @@ public class PlayerController : MonoBehaviour
         
     }
 
-
+    IEnumerator TimeShiftEffect()
+    {
+        print("started");
+        Flash.gameObject.SetActive(true);
+        for (float i = 0; i < 1; i += .1f)
+        {
+            print("loopin");
+            yield return new WaitForSecondsRealtime(.01f);
+            Flash.range = EaseOutQuad(11, 30, i);
+        }
+        print("done");
+        
+        Flash.gameObject.SetActive(false);
+        Flash.range = 12;
+        yield return null;
+    }
 
     public static float EaseOutQuad(float start, float end, float value)
     {

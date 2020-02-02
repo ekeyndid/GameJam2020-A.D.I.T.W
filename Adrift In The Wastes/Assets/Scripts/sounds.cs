@@ -12,7 +12,7 @@ public class sounds : MonoBehaviour
     public AudioClip walkPast;
     public AudioClip landing;
     public AudioClip wind;
-    public AudioClip pastAmbience;
+    public AudioClip TimeWarp;
     public AudioClip itemCollect;
     public AudioClip puzzleComplete;
     public AudioClip repairedLand;
@@ -40,6 +40,13 @@ public class sounds : MonoBehaviour
         tState = player.gameObject.GetComponent<PlayerController>().CurrentTimePhase;
     }
    
+    public void TimewarpS()
+    {
+        SFXS.clip = TimeWarp;
+        SFXS.Play();
+
+    }
+
     IEnumerator music()
     {
         while (true)

@@ -12,6 +12,7 @@ TagManager:
   - Key2
   - Hole1
   - Hole2
+  - Killplane
   layers:
   - Default
   - TransparentFX
