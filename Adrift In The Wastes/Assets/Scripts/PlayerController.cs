@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Player;
     public static Vector3 PlayerPos;
-    public static int Level = 0;
     private Rigidbody rb;
     private int count;
     public bool Key1;
@@ -141,7 +140,6 @@ public class PlayerController : MonoBehaviour
 
             CurrentTimePhase = 2;
             StartCoroutine(TimeShift());
-            StartCoroutine(NextLevel());
         }
         else if (boi.gameObject.CompareTag("Zoomy"))
         {
@@ -156,10 +154,7 @@ public class PlayerController : MonoBehaviour
             Key1 = true;
 
         }
-        else if (boi.gameObject.CompareTag("Killplane"))
-        {
-            StartCoroutine(Ree());
-        }
+
 
 
     }
@@ -305,28 +300,10 @@ public class PlayerController : MonoBehaviour
         return -end * value * (value - 2) + start;
     }
 
-    IEnumerator Ree()
-    {
-        rb.velocity = new Vector3(0, 0, 0);
-        yield return new WaitForSecondsRealtime(1);
-        rb.velocity = new Vector3(0, 0, 0);
-        LOad.loadin = true;
-        rb.velocity = new Vector3(0, 0, 0);
-    }
 
-    IEnumerator NextLevel()
-    {
-        //rb.velocity = new Vector3(0, 0, 0);
-        while(IsGrounded == true)
-        {
-            yield return new WaitForSeconds(0);
-        }
-        yield return new WaitForSeconds(3f);
-        print("New level");
-        rb.velocity = new Vector3(0, 0, 0);
-        PlayerController.Level = PlayerController.Level + 1;
-        LOad.loadin = true;
-    }
+
+
+
 
 
 
