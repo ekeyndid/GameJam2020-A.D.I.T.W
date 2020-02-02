@@ -47,6 +47,18 @@ public class sounds : MonoBehaviour
 
     }
 
+    public void SoundEffect(string Effect)
+    {
+        if (Effect == "key")
+        {
+            
+            SFXS.clip = itemCollect;
+            SFXS.Play();
+        }
+        
+    }
+
+
     IEnumerator music()
     {
         while (true)

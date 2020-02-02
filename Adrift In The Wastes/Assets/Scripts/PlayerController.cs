@@ -151,6 +151,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (boi.gameObject.CompareTag("Key1") && boi.gameObject.GetComponent<rotateboi>().State != 1)
         {
+            Player.gameObject.GetComponent<sounds>().SoundEffect("key");
             KeyOne = boi.gameObject;
             boi.gameObject.GetComponent<rotateboi>().State = 1;
             Key1 = true;
