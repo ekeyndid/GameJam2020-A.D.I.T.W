@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731703, g: 0.13414727, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5014,7 +5014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: {fileID: 230776305}
-  XForce: -0.3
+  XForce: -0.1
   YForce: 0
 --- !u!1 &275555892
 GameObject:
@@ -5501,6 +5501,7 @@ MonoBehaviour:
   KeyOne: {fileID: 0}
   PlayerVelocity: 0
   PlayCam: {fileID: 941261301}
+  Flash: {fileID: 0}
   MaxSpeed: 10
   Accel: 1.5
   CamDist: 0
@@ -5819,7 +5820,7 @@ MonoBehaviour:
   walkPast: {fileID: 0}
   landing: {fileID: 0}
   wind: {fileID: 8300000, guid: 40a808c61ce19d34bb6db77565bfc552, type: 3}
-  pastAmbience: {fileID: 0}
+  TimeWarp: {fileID: 0}
   itemCollect: {fileID: 0}
   puzzleComplete: {fileID: 0}
   repairedLand: {fileID: 8300000, guid: 117c63e805f0b1d4884af4c4c6f05126, type: 3}
