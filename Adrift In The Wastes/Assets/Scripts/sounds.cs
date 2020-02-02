@@ -39,7 +39,7 @@ public class sounds : MonoBehaviour
     {
         tState = player.gameObject.GetComponent<PlayerController>().CurrentTimePhase;
     }
-
+   
     IEnumerator music()
     {
         while (true)
