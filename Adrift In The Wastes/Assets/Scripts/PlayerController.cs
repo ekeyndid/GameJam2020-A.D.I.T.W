@@ -196,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+    
     private void OnCollisionExit(Collision boi)
     {
         //print("i hit something");
