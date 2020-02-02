@@ -13,9 +13,13 @@ MonoImporter:
   - landing: {instanceID: 0}
   - wind: {fileID: 8300000, guid: 40a808c61ce19d34bb6db77565bfc552, type: 3}
   - pastAmbience: {instanceID: 0}
-  - itemCollect: {instanceID: 0}
-  - puzzleComplete: {instanceID: 0}
+  - itemCollect: {fileID: 8300000, guid: 7e84f1d85dce39746a70b43828f7dfb2, type: 3}
+  - puzzleComplete: {fileID: 8300000, guid: 555917f314880434c831c85f704d2b0c, type: 3}
   - repairedLand: {fileID: 8300000, guid: 117c63e805f0b1d4884af4c4c6f05126, type: 3}
+  - PresentS: {instanceID: 0}
+  - PastS: {instanceID: 0}
+  - SFXS: {instanceID: 0}
+  - Ambiance: {instanceID: 0}
   - player: {instanceID: 0}
   - rb: {instanceID: 0}
   executionOrder: 0
